@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meshchecklib"
+version = "0.1.0"
+description = "Library for mesh checking functions (outside of Slicer)"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pyright",
+    "ruff",
+    "build",
+]
+
+[tool.setuptools.packages.find]
+where = ["./"]
+include = ["MeshCheckLib*"]
+namespaces = false
+
+[tool.pyright]
+typeCheckingMode = "strict"
+include = ["MeshCheckLib"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["Testing"]
