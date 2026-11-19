@@ -7,7 +7,7 @@ name = "meshchecklib"
 version = "0.1.0"
 description = "Library for mesh checking functions (outside of Slicer)"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = ["vtk"]
 
 [project.optional-dependencies]
 dev = [
