@@ -16,10 +16,10 @@ def load_vtp() -> vtkmodules.vtkCommonCore.vtkPolyData:
     return reader.GetOutput()
 
 
-def test_open_boundaries_check():
+def test_open_edges_check():
     vtp = load_vtp()
 
-    check_result = MeshCheckLib.surface_checks.OpenBoundaryCheck.run(vtp, None)
+    check_result = MeshCheckLib.surface_checks.OpenEdgeCheck.run(vtp, None)
 
     # for now, don't really do a deep VTP check, just make sure it's failed
     # TODO add a vtp to compare to as the evidence

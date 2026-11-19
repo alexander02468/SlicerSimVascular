@@ -13,9 +13,9 @@ from . import check
 
 
 @dataclass(frozen=True)
-class OpenBoundaryCheck(check.Check):
+class OpenEdgeCheck(check.Check):
     """
-    Checks for open boundaries, i.e. edges that are connected only on one face.
+    Checks for open edges, i.e. edges that are connected only on one face.
 
     """
 
