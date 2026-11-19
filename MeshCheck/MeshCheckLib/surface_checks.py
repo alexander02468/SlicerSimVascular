@@ -11,11 +11,12 @@ import vtkmodules.vtkFiltersCore as vtkFiltersCore
 
 from . import check
 
+
 @dataclass(frozen=True)
 class OpenBoundaryCheck(check.Check):
     """
     Checks for open boundaries, i.e. edges that are connected only on one face.
-    
+
     """
 
     definition = check.CheckDefinition(
@@ -23,12 +24,14 @@ class OpenBoundaryCheck(check.Check):
         mesh_type=check.MeshType.SURFACE,
         param_types=None,
     )
-    
+
     @classmethod
-    def run(cls, vtk_dataset, params : tuple[Any] | None) -> check.CheckResult:
+    def run(cls, vtk_dataset, params: tuple[Any] | None) -> check.CheckResult:
         cls.validate_params(params)
         if not isinstance(vtk_dataset, vtkCommonDataModel.vtkPolyData):
-            raise check.CheckException(f"vtk of type {type(vtk_dataset)} is not of type vtkPolyData")
+            raise check.CheckException(
+                f"vtk of type {type(vtk_dataset)} is not of type vtkPolyData"
+            )
         featureEdges = vtkFiltersCore.vtkFeatureEdges()
         featureEdges.SetInputData(vtk_dataset)
         featureEdges.BoundaryEdgesOn()

@@ -1,14 +1,20 @@
-
 from MeshCheckLib.check import CheckStatus
 import MeshCheckLib.surface_checks
 import vtkmodules.vtkCommonCore
 import vtkmodules.vtkIOXML
+from pathlib import Path
+
 
 def load_vtp() -> vtkmodules.vtkCommonCore.vtkPolyData:
-    reader =  vtkmodules.vtkIOXML.vtkXMLPolyDataReader()
-    reader.SetFileName("Testing/fixtures/vascular_checker_all_faults.vtp")
+    fixture_path = Path(__file__).parent / "fixtures/vascular_checker_all_faults.vtp"
+    if not fixture_path.exists():
+        raise FileExistsError
+
+    reader = vtkmodules.vtkIOXML.vtkXMLPolyDataReader()
+    reader.SetFileName(fixture_path.as_posix())
     reader.Update()
     return reader.GetOutput()
+
 
 def test_open_boundaries_check():
     vtp = load_vtp()
@@ -17,4 +23,4 @@ def test_open_boundaries_check():
 
     # for now, don't really do a deep VTP check, just make sure it's failed
     # TODO add a vtp to compare to as the evidence
-    assert (check_result.check_status == CheckStatus.FAILED)
+    assert check_result.check_status == CheckStatus.FAILED
