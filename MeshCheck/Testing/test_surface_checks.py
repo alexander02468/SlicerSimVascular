@@ -1,11 +1,11 @@
 from MeshCheckLib.check import CheckStatus
 import MeshCheckLib.surface_checks
-import vtkmodules.vtkCommonCore
+import vtkmodules.vtkCommonDataModel
 import vtkmodules.vtkIOXML
 from pathlib import Path
 
 
-def load_vtp() -> vtkmodules.vtkCommonCore.vtkPolyData:
+def load_vtp() -> vtkmodules.vtkCommonDataModel.vtkPolyData:
     fixture_path = Path(__file__).parent / "fixtures/vascular_checker_all_faults.vtp"
     if not fixture_path.exists():
         raise FileExistsError
