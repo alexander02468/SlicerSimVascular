@@ -34,3 +34,13 @@ def test_non_manifold_edge_check():
     # for now, don't really do a deep VTP check, just make sure it's failed
     # TODO add a vtp to compare to as the evidence
     assert check_result.check_status == CheckStatus.FAILED
+
+
+def test_isolated_surface_check():
+    vtp = load_vtp()
+
+    check_result = MeshCheckLib.surface_checks.IsolatedSurfaceCheck.run(vtp, None)
+
+    # for now, don't really do a deep VTP check, just make sure it's failed
+    # TODO add a vtp to compare to as the evidence
+    assert check_result.check_status == CheckStatus.FAILED
